@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import menu.common.ErrorMessage;
 
-public enum Menu {
+public enum Category {
 
     JAPANESE(1, "일식", "규동", "우동", "미소시루", "스시", "가츠동", "오니기리", "하이라이스", "라멘", "오코노미야끼"),
     KOREAN(2, "한식", "김밥", "김치찌개", "쌈밥", "된장찌개", "비빔밥", "칼국수", "불고기", "떡볶이", "제육볶음"),
@@ -16,17 +16,16 @@ public enum Menu {
     private final String name;
     private final List<String> menus;
 
-    Menu(final int value, final String name, final String... menus) {
+    Category(final int value, final String name, final String... menus) {
         this.value = value;
         this.name = name;
         this.menus = List.of(menus);
     }
 
-    public static String findCategory(final int value) {
+    public static Category findCategory(final int value) {
         return Arrays.stream(values())
-                .filter(response -> response.value == value)
+                .filter(response -> response.isEqual(value))
                 .findFirst()
-                .map(Menu::name)
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_FOUND_CATEGORY.getMessage()));
     }
 
@@ -34,4 +33,10 @@ public enum Menu {
         return Arrays.stream(values())
                 .anyMatch(response -> response.menus.contains(menuName));
     }
+
+    private boolean isEqual(final int value) {
+        return this.value == value;
+    }
+
+
 }
