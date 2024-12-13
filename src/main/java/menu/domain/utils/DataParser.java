@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import menu.common.ErrorMessage;
-import menu.domain.Menu;
+import menu.domain.Category;
 import menu.domain.coach.Coach;
 
 public class DataParser {
@@ -19,12 +19,13 @@ public class DataParser {
 
     public static List<String> parseMenuName(final String menus) {
         return Arrays.stream(menus.split(DELIMITER))
+                .filter(menu -> !menu.isBlank())
                 .peek(DataParser::validateMenuName)
                 .collect(Collectors.toList());
     }
 
     private static void validateMenuName(final String menuName) {
-        if (!Menu.isExist(menuName)) {
+        if (!Category.isExist(menuName)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_MENU_NAME.getMessage());
         }
     }
