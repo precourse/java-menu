@@ -12,8 +12,15 @@ public class InputView {
         return input;
     }
 
+    public String inputInedibleMenu(final String name) {
+        System.out.printf("%s(이)가 못 먹는 메뉴를 입력해 주세요.");
+        String input = Console.readLine();
+        validate(input);
+        return input;
+    }
+
     private void validate(final String input) {
-        if (input == null || input.isBlank()) {
+        if (input == null) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getMessage());
         }
     }
