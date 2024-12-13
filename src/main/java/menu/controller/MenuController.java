@@ -1,5 +1,6 @@
 package menu.controller;
 
+import java.util.function.Supplier;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -14,5 +15,26 @@ public class MenuController {
     }
 
     public void run() {
+    }
+
+    private <T> T retryTemplate(final Supplier<T> action) {
+        while (true) {
+            try {
+                return action.get();
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private void retryTemplate(final Runnable action) {
+        while (true) {
+            try {
+                action.run();
+                break;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
     }
 }
