@@ -2,7 +2,7 @@ package menu.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,7 +20,7 @@ public class Result {
     }
 
     private Map<Coach, List<String>> initResults(final Coaches coaches) {
-        Map<Coach, List<String>> results = new HashMap<>();
+        Map<Coach, List<String>> results = new LinkedHashMap<>();
         for (Coach coach : coaches.getCoaches()) {
             results.put(coach, new ArrayList<>());
         }
