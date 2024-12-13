@@ -24,7 +24,7 @@ public enum Category {
 
     public static Category findCategory(final int value) {
         return Arrays.stream(values())
-                .filter(response -> response.isEqual(value))
+                .filter(response -> response.value == value)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_FOUND_CATEGORY.getMessage()));
     }
@@ -40,9 +40,5 @@ public enum Category {
 
     public String getName() {
         return name;
-    }
-
-    private boolean isEqual(final int value) {
-        return this.value == value;
     }
 }
