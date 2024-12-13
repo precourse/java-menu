@@ -9,25 +9,15 @@ public class Coach {
 
     private static final int MIN_NAME_LENGTH = 2;
     private static final int MAX_NAME_LENGTH = 4;
-    private static final int MIN_MENU_LENGTH = 0;
     private static final int MAX_MENU_LENGTH = 2;
 
     private final String name;
     private final List<String> inedible;
 
     public Coach(final String name) {
+        validate(name);
         this.name = name;
         this.inedible = new ArrayList<>();
-    }
-
-    private void validate(final String name) {
-        if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_NAME_LENGTH.getMessage());
-        }
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void addInedible(final String inedibleMenus) {
@@ -36,8 +26,22 @@ public class Coach {
         inedible.addAll(menus);
     }
 
+    public boolean canNotEat(final String menu) {
+        return inedible.contains(menu);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    private void validate(final String name) {
+        if (name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NAME_LENGTH.getMessage());
+        }
+    }
+
     private void validateInedibleSize(final List<String> menus) {
-        if (menus.size() < MIN_MENU_LENGTH || menus.size() > MAX_MENU_LENGTH) {
+        if (menus.size() > MAX_MENU_LENGTH) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INEDIBLE_MENU.getMessage());
         }
     }
