@@ -7,14 +7,13 @@ import menu.domain.coach.Coaches;
 public class Recommender {
 
     private static final int TOTAL_DAY = 5;
-    private static final int CATEGORY_LIMIT = 2;
+    private static final int CATEGORY_COUNT_LIMIT = 2;
 
     private final RandomMachine randomMachine;
 
     public Recommender(final RandomMachine randomMachine) {
         this.randomMachine = randomMachine;
     }
-
 
     public Result recommend(final Coaches coaches) {
         Result result = new Result(coaches);
@@ -30,7 +29,7 @@ public class Recommender {
 
     private Category getRandomCategory(final Result result) {
         Category category = randomMachine.pickRandomCategory();
-        if (result.categoryCount(category) > CATEGORY_LIMIT) {
+        if (result.categoryCount(category) > CATEGORY_COUNT_LIMIT) {
             getRandomCategory(result);
         }
         result.addCategory(category);
