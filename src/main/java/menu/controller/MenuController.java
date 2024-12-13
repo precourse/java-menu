@@ -24,6 +24,7 @@ public class MenuController {
     public void run() {
         outputView.printWelcomeMessage();
         Coaches coaches = parseCoaches();
+        setInedibleMenu(coaches);
     }
 
     private Coaches parseCoaches() {
@@ -31,6 +32,17 @@ public class MenuController {
             String input = inputView.inputCoachNames();
             List<Coach> coaches = DataParser.parseCoachName(input);
             return new Coaches(coaches);
+        });
+    }
+
+    private void setInedibleMenu(final Coaches coaches) {
+        coaches.getCoaches().forEach(this::parseInedibleMenu);
+    }
+
+    private void parseInedibleMenu(final Coach coach) {
+        retryTemplate(() -> {
+            String input = inputView.inputInedibleMenu(coach.getName());
+            coach.addInedible(input);
         });
     }
 
