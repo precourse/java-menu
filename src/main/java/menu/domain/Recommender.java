@@ -20,9 +20,7 @@ public class Recommender {
         for (int date = 0; date < TOTAL_DAY; date++) {
             Category category = getRandomCategory(result);
             List<String> menusInCategory = category.findMenus();
-            for (Coach coach : coaches.getCoaches()) {
-                getRandomMenu(result, coach, menusInCategory);
-            }
+            coaches.getCoaches().forEach(coach -> getRandomMenu(result, coach, menusInCategory));
         }
         return result;
     }
