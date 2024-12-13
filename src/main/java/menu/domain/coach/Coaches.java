@@ -1,5 +1,6 @@
 package menu.domain.coach;
 
+import java.util.Collections;
 import java.util.List;
 import menu.common.ErrorMessage;
 
@@ -11,6 +12,7 @@ public class Coaches {
     private final List<Coach> coaches;
 
     public Coaches(final List<Coach> coaches) {
+        validate(coaches);
         this.coaches = coaches;
     }
 
@@ -18,5 +20,9 @@ public class Coaches {
         if (coaches.size() < MIN_COACHES || coaches.size() > MAX_COACHES) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_COACH_SIZE.getMessage());
         }
+    }
+
+    public List<Coach> getCoaches() {
+        return Collections.unmodifiableList(coaches);
     }
 }
