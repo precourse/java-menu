@@ -16,16 +16,16 @@ public class Recommender {
     }
 
 
-    public void recommend(final Coaches coaches) {
+    public Result recommend(final Coaches coaches) {
         Result result = new Result(coaches);
         for (int date = 0; date < TOTAL_DAY; date++) {
             Category category = getRandomCategory(result);
             List<String> menusInCategory = category.findMenus();
             for (Coach coach : coaches.getCoaches()) {
-
+                getRandomMenu(result, coach, menusInCategory);
             }
-
         }
+        return result;
     }
 
     private Category getRandomCategory(final Result result) {
@@ -39,7 +39,7 @@ public class Recommender {
 
     private void getRandomMenu(final Result result, final Coach coach, final List<String> menusInCategory) {
         String menu = randomMachine.pickRandomMenu(menusInCategory);
-        if (result.isContainMenu(coach, menu)) {
+        if (result.isContainMenu(coach, menu) || coach.canNotEat(menu)) {
             getRandomMenu(result, coach, menusInCategory);
         }
         result.addMenu(coach, menu);

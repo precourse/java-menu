@@ -3,6 +3,7 @@ package menu.controller;
 import java.util.List;
 import java.util.function.Supplier;
 import menu.domain.Recommender;
+import menu.domain.Result;
 import menu.domain.coach.Coach;
 import menu.domain.coach.Coaches;
 import menu.domain.utils.DataParser;
@@ -25,7 +26,7 @@ public class MenuController {
         outputView.printWelcomeMessage();
         Coaches coaches = parseCoaches();
         setInedibleMenu(coaches);
-        recommender.recommend(coaches);
+        Result result = recommender.recommend(coaches);
     }
 
     private Coaches parseCoaches() {
