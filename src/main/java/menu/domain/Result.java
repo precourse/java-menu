@@ -45,7 +45,6 @@ public class Result {
     public void addMenu(final Coach coach, final String menu) {
         List<String> values = results.get(coach);
         values.add(menu);
-        results.put(coach, values);
     }
 
     public List<String> getCategoryNames() {
