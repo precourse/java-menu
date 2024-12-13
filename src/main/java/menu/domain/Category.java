@@ -38,5 +38,7 @@ public enum Category {
         return this.value == value;
     }
 
-
+    public String getName() {
+        return name;
+    }
 }

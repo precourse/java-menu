@@ -9,7 +9,7 @@ import menu.domain.coach.Coaches;
 
 public class Result {
 
-    private final List<String> categories;
+    private final List<Category> categories;
     private final Map<Coach, List<String>> results;
 
     public Result(final Coaches coaches) {
@@ -23,5 +23,15 @@ public class Result {
             results.put(coach, new ArrayList<>());
         }
         return results;
+    }
+
+    public int categoryCount(final Category category) {
+        return (int) categories.stream()
+                .filter(c -> c == category)
+                .count();
+    }
+
+    public void addCategory(final Category category) {
+        categories.add(category);
     }
 }

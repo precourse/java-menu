@@ -5,6 +5,7 @@ import menu.domain.coach.Coaches;
 public class Recommender {
 
     private static final int TOTAL_DAY = 5;
+    private static final int CATEGORY_LIMIT = 2;
 
     private final RandomMachine randomMachine;
 
@@ -14,8 +15,20 @@ public class Recommender {
 
 
     public void recommend(final Coaches coaches) {
-        for (int i = 0; i < TOTAL_DAY; i++) {
-            Category category = randomMachine.pickRandomCategory();
+        Result result = new Result(coaches);
+        for (int date = 0; date < TOTAL_DAY; date++) {
+            Category category = getRandomCategory(result);
+
+
         }
+    }
+
+    private Category getRandomCategory(final Result result) {
+        Category category = randomMachine.pickRandomCategory();
+        if (result.categoryCount(category) > CATEGORY_LIMIT) {
+            getRandomCategory(result);
+        }
+        result.addCategory(category);
+        return category;
     }
 }

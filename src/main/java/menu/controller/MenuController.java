@@ -25,6 +25,7 @@ public class MenuController {
         outputView.printWelcomeMessage();
         Coaches coaches = parseCoaches();
         setInedibleMenu(coaches);
+        recommender.recommend(coaches);
     }
 
     private Coaches parseCoaches() {
