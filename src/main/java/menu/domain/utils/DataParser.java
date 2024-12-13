@@ -25,7 +25,7 @@ public class DataParser {
     }
 
     private static void validateMenuName(final String menuName) {
-        if (!Category.isExist(menuName)) {
+        if (!Category.isExist(menuName.trim())) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_MENU_NAME.getMessage());
         }
     }
