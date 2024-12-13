@@ -22,6 +22,7 @@ public class MenuController {
     }
 
     public void run() {
+        outputView.printWelcomeMessage();
         Coaches coaches = parseCoaches();
     }
 
