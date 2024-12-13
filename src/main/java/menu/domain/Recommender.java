@@ -28,19 +28,19 @@ public class Recommender {
     }
 
     private Category getRandomCategory(final Result result) {
-        Category category = randomMachine.pickRandomCategory();
-        if (result.categoryCount(category) > CATEGORY_COUNT_LIMIT) {
-            getRandomCategory(result);
-        }
+        Category category;
+        do {
+            category = randomMachine.pickRandomCategory();
+        } while (result.categoryCount(category) > CATEGORY_COUNT_LIMIT);
         result.addCategory(category);
         return category;
     }
 
     private void getRandomMenu(final Result result, final Coach coach, final List<String> menusInCategory) {
-        String menu = randomMachine.pickRandomMenu(menusInCategory);
-        if (result.isContainMenu(coach, menu) || coach.canNotEat(menu)) {
-            getRandomMenu(result, coach, menusInCategory);
-        }
+        String menu;
+        do {
+            menu = randomMachine.pickRandomMenu(menusInCategory);
+        } while (result.isContainMenu(coach, menu) || coach.canNotEat(menu));
         result.addMenu(coach, menu);
     }
 }
