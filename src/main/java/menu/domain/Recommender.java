@@ -1,5 +1,7 @@
 package menu.domain;
 
+import java.util.List;
+import menu.domain.coach.Coach;
 import menu.domain.coach.Coaches;
 
 public class Recommender {
@@ -18,7 +20,10 @@ public class Recommender {
         Result result = new Result(coaches);
         for (int date = 0; date < TOTAL_DAY; date++) {
             Category category = getRandomCategory(result);
+            List<String> menusInCategory = category.findMenus();
+            for (Coach coach : coaches.getCoaches()) {
 
+            }
 
         }
     }
@@ -30,5 +35,13 @@ public class Recommender {
         }
         result.addCategory(category);
         return category;
+    }
+
+    private void getRandomMenu(final Result result, final Coach coach, final List<String> menusInCategory) {
+        String menu = randomMachine.pickRandomMenu(menusInCategory);
+        if (result.isContainMenu(coach, menu)) {
+            getRandomMenu(result, coach, menusInCategory);
+        }
+        result.addMenu(coach, menu);
     }
 }

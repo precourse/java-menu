@@ -34,11 +34,15 @@ public enum Category {
                 .anyMatch(response -> response.menus.contains(menuName));
     }
 
-    private boolean isEqual(final int value) {
-        return this.value == value;
+    public List<String> findMenus() {
+        return menus;
     }
 
     public String getName() {
         return name;
+    }
+
+    private boolean isEqual(final int value) {
+        return this.value == value;
     }
 }

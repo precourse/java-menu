@@ -34,4 +34,18 @@ public class Result {
     public void addCategory(final Category category) {
         categories.add(category);
     }
+
+    public boolean isContainMenu(final Coach coach, final String menu) {
+        List<String> values = results.get(coach);
+        if (values.contains(menu)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void addMenu(final Coach coach, final String menu) {
+        List<String> values = results.get(coach);
+        values.add(menu);
+        results.put(coach, values);
+    }
 }

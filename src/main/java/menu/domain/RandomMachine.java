@@ -1,6 +1,7 @@
 package menu.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.List;
 
 public class RandomMachine {
 
@@ -10,5 +11,9 @@ public class RandomMachine {
     public Category pickRandomCategory() {
         int number = Randoms.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
         return Category.findCategory(number);
+    }
+
+    public String pickRandomMenu(final List<String> menus) {
+        return Randoms.shuffle(menus).get(0);
     }
 }
