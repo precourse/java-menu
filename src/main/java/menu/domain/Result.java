@@ -1,6 +1,7 @@
 package menu.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,10 +39,7 @@ public class Result {
 
     public boolean isContainMenu(final Coach coach, final String menu) {
         List<String> values = results.get(coach);
-        if (values.contains(menu)) {
-            return true;
-        }
-        return false;
+        return values.contains(menu);
     }
 
     public void addMenu(final Coach coach, final String menu) {
@@ -57,6 +55,6 @@ public class Result {
     }
 
     public Map<Coach, List<String>> getResults() {
-        return results;
+        return Collections.unmodifiableMap(results);
     }
 }
