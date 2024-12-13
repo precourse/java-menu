@@ -27,22 +27,22 @@ public class Result {
         return results;
     }
 
-    public int categoryCount(final Category category) {
+    int categoryCount(final Category category) {
         return (int) categories.stream()
                 .filter(c -> c == category)
                 .count();
     }
 
-    public void addCategory(final Category category) {
+    void addCategory(final Category category) {
         categories.add(category);
     }
 
-    public boolean isContainMenu(final Coach coach, final String menu) {
+    boolean isContainMenu(final Coach coach, final String menu) {
         List<String> values = results.get(coach);
         return values.contains(menu);
     }
 
-    public void addMenu(final Coach coach, final String menu) {
+    void addMenu(final Coach coach, final String menu) {
         List<String> values = results.get(coach);
         values.add(menu);
     }
