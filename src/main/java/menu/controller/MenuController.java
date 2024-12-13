@@ -1,7 +1,11 @@
 package menu.controller;
 
+import java.util.List;
 import java.util.function.Supplier;
 import menu.domain.Recommender;
+import menu.domain.coach.Coach;
+import menu.domain.coach.Coaches;
+import menu.domain.utils.DataParser;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -18,6 +22,15 @@ public class MenuController {
     }
 
     public void run() {
+        Coaches coaches = parseCoaches();
+    }
+
+    private Coaches parseCoaches() {
+        return retryTemplate(() -> {
+            String input = inputView.inputCoachNames();
+            List<Coach> coaches = DataParser.parseCoachName(input);
+            return new Coaches(coaches);
+        });
     }
 
     private <T> T retryTemplate(final Supplier<T> action) {
