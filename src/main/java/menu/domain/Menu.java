@@ -29,4 +29,9 @@ public enum Menu {
                 .map(Menu::name)
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_FOUND_CATEGORY.getMessage()));
     }
+
+    public static boolean isExist(final String menuName) {
+        return Arrays.stream(values())
+                .anyMatch(response -> response.menus.contains(menuName));
+    }
 }
