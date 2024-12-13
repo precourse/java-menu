@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import menu.domain.coach.Coach;
 import menu.domain.coach.Coaches;
 
@@ -47,5 +48,15 @@ public class Result {
         List<String> values = results.get(coach);
         values.add(menu);
         results.put(coach, values);
+    }
+
+    public List<String> getCategoryNames() {
+        return categories.stream()
+                .map(Category::getName)
+                .collect(Collectors.toList());
+    }
+
+    public Map<Coach, List<String>> getResults() {
+        return results;
     }
 }
